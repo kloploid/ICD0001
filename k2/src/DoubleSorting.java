@@ -148,7 +148,33 @@ public class DoubleSorting {
       mergeSort(array, k, right);
       merge(array, left, k, right);
    }
+   public static void recursive_binaryInsertionSort(double[] arr)
+   {
+    if(arr.length<2){
+       return;
+    }
 
+      for (int i = 1; i <arr.length ; i++) {
+         double find = arr[i];
+         int mid = findMiddle(arr,0,i,find);
+         System.arraycopy(arr,mid,arr,mid+1,i-mid);
+         arr[mid] = find;
+      }
+
+   }
+
+   private static int findMiddle(double[] arr, int low, int high, double find) {
+      if(low==high){
+         return low;
+      }
+      int mid  = (high+low)/2;
+      if(find> arr[mid]){
+         return findMiddle(arr, mid+1,high,find);
+      }else if(find<arr[mid]){
+         return findMiddle(arr,low,mid,find);
+      }
+      return mid;
+   }
    /**
     * Merge two intervals.
     * 
