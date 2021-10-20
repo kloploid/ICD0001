@@ -1,4 +1,3 @@
-
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -163,30 +162,48 @@ public class DoubleStackTest {
 
    @Test (timeout=1000)
    public void testCustom1() {
-      String s = "2. 5. SWAP -";
-      assertEquals ("expression: " + Aout.toString (s), 3.,
+      String s = "2. 6. SWAP -";
+      assertEquals ("expression: " + Aout.toString (s), 4.,
               DoubleStack.interpret (s), delta);
    }
 
    @Test (timeout=1000)
    public void testCustom2() {
-      String s = "3. DUP *";
-      assertEquals ("expression: " + Aout.toString (s), 9.,
+      String s = "5. DUP *";
+      assertEquals ("expression: " + Aout.toString (s), 25.,
               DoubleStack.interpret (s), delta);
    }
 
    @Test (timeout=1000)
    public void testCustom3() {
-      String s = "2. 5. 9. ROT - +";
-      assertEquals ("expression: " + Aout.toString (s), 12.,
+      String s = "2. 5. 4. ROT - +";
+      assertEquals ("expression: " + Aout.toString (s), 7.,
               DoubleStack.interpret (s), delta);
    }
 
    @Test (timeout=1000)
    public void testCustom4() {
-      String s = "-3. -5. -7. ROT - SWAP DUP * +";
-      assertEquals ("expression: " + Aout.toString (s), 21.,
+      String s = "-3. -5. -12. ROT - SWAP DUP * +";
+      assertEquals ("expression: " + Aout.toString (s), 16.,
               DoubleStack.interpret (s), delta);
+   }
+
+   @Test (expected=RuntimeException.class)
+   public void testCustom5() {
+      String s = "4. SWAP";
+      DoubleStack.interpret (s);
+   }
+
+   @Test (expected=RuntimeException.class)
+   public void testCustom6() {
+      String s = "8. 7. ROT";
+      DoubleStack.interpret (s);
+   }
+
+   @Test (expected=RuntimeException.class)
+   public void testCustom7() {
+      String s = "DUP";
+      DoubleStack.interpret (s);
    }
 
    @Test (expected=RuntimeException.class)
